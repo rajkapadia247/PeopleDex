@@ -1,0 +1,21 @@
+.mainview {
+  flex: 4;
+  height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.mainview-header {
+  font-size: 2.5rem;
+}
+
+.mainview-header-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.contact-table {
+  padding: 2rem;
+}

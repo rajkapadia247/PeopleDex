@@ -1,0 +1,7 @@
+tr {
+  height: 63px;
+}
+
+tr td {
+  height: auto !important;
+}
