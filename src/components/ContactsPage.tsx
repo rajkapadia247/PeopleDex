@@ -4,9 +4,9 @@ import MainView from "./MainView";
 import "./applayout.css";
 import ActiveTabContext from "../contexts/ActiveTabContext";
 import RefreshDataContext from "../contexts/RefreshDataContext";
-interface AppLayoutProps {}
+interface ContactsPageProps {}
 
-const AppLayout: FunctionComponent<AppLayoutProps> = () => {
+const ContactsPage: FunctionComponent<ContactsPageProps> = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [refreshKey, setRefreshKey] = useState(0);
   const incrementRefreshKey = () => setRefreshKey((prev) => prev + 1);
@@ -22,4 +22,4 @@ const AppLayout: FunctionComponent<AppLayoutProps> = () => {
   );
 };
 
-export default AppLayout;
+export default ContactsPage;

@@ -31,11 +31,11 @@ const DeleteModal: FunctionComponent<DeleteModalProps> = ({
           component: "form",
           onSubmit: (event: any) => {
             event.preventDefault();
-            deleteContact(deleteId)
-              .then(() => {
-                console.log("Contact deleted:", deleteId);
-              })
-              incrementRefreshKey()
+            deleteContact(deleteId).then(() => {
+              console.log("Contact deleted:", deleteId);
+              incrementRefreshKey();
+              // TO DO: Add a success toast notification here
+            });
             handleClose();
           },
         },

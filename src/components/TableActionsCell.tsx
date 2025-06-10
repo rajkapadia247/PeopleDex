@@ -32,8 +32,8 @@ const TableActionsCell: FunctionComponent<TableActionsCellProps> = ({
   const { incrementRefreshKey } = useContext(RefreshDataContext);
 
 
-  const toggleFavoriteState = () => {
-    toggleFavorite(rowData.id);
+  const toggleFavoriteState = async () => {
+    await toggleFavorite(rowData.id);
     incrementRefreshKey();
   };
   const handleEditOpen = () => {

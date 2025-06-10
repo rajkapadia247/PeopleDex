@@ -55,14 +55,17 @@ const CreateEditModal: FunctionComponent<CreateEditModalProps> = ({
               updateContact({ ...formData, id: editData?.id })
                 .then((updatedContact) => {
                   console.log("Contact updated:", updatedContact);
+                  incrementRefreshKey()
+                  // TO DO: Add a success toast notification here
                 });
             } else {
               createContact(formData)
                 .then((newContact) => {
                   console.log("Contact created:", newContact);
+                  incrementRefreshKey()
+                  // TO DO: Add a success toast notification here
                 });
             }
-            incrementRefreshKey()
             onClose();
           },
         },
