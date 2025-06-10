@@ -3,7 +3,6 @@ import ActionButton from "../../atoms/ActionButton/ActionButton";
 import "./../../sidebar.css";
 import ActiveTabContext from "../../../contexts/ActiveTabContext/ActiveTabContext";
 import { Button } from "@mui/material";
-import { useAuth } from "../../../contexts/AuthContext/useAuth";
 
 interface SidebarProps {}
 
@@ -14,10 +13,6 @@ const sideBarItems = [
 
 const Sidebar: FunctionComponent<SidebarProps> = () => {
   const { activeTab, setActiveTab } = useContext(ActiveTabContext);
-  const { logout } = useAuth();
-  const handleLogout = () => {
-    logout();
-  };
   return (
     <div className="sidebar">
       <h1 className="sidebar-header">Contacts</h1>
@@ -54,7 +49,6 @@ const Sidebar: FunctionComponent<SidebarProps> = () => {
       <div className="sidebar-action-button-container">
         <ActionButton />
       </div>
-      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

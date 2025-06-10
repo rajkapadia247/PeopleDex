@@ -4,6 +4,7 @@ import "./../../mainview.css";
 import Search from "../../molecules/Search/Search";
 import ActiveTabContext from "../../../contexts/ActiveTabContext/ActiveTabContext";
 import { debounce } from "../../../utils/utils";
+import Header from "../../molecules/Header/Header";
 interface MainViewProps {}
 
 const items = [
@@ -27,10 +28,8 @@ const MainView: FunctionComponent<MainViewProps> = () => {
   }
   return (
     <div className="mainview">
-      <div className="mainview-header-container">
-        <span className="mainview-header">{(items.find(item => item.term === activeTab) || items[0]).name}</span>
-        <Search searchTerm={searchTerm} searchTermChangeHandler={searchTermChangeHandler} />
-      </div>
+      <Header activeTab={activeTab}/>
+      <Search searchTerm={searchTerm} searchTermChangeHandler={searchTermChangeHandler} />
       <ContactListTable searchTerm={searchTermForAPI} isFavoriteTab={activeTab === "fav"} />
     </div>
   );
