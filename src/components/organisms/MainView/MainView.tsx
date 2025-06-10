@@ -17,10 +17,10 @@ const MainView: FunctionComponent<MainViewProps> = () => {
   const { activeTab } = useContext(ActiveTabContext);
 
   const debouncedSetSearchTermForAPI = useMemo(
-    () => debounce((val) => setSearchTermForAPI(val), 500),
+    () => debounce((val: string) => setSearchTermForAPI(val), 500),
     []
   );
-  const searchTermChangeHandler = (e) => {
+  const searchTermChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setSearchTerm(val);
     debouncedSetSearchTermForAPI(val);

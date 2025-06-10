@@ -4,7 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 interface SearchProps {
   searchTerm: string;
-  searchTermChangeHandler: (term: string) => void;
+  searchTermChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Search: FunctionComponent<SearchProps> = ({searchTerm, searchTermChangeHandler}) => {

@@ -1,4 +1,5 @@
 import api from "../api/axios";
+import type { ContactType, FormDataType } from "../types/interfaces";
 
 export const fetchContacts = async (
   searchTerm: string,
@@ -16,7 +17,7 @@ export const fetchContacts = async (
   return response.data;
 };
 
-export const createContact = async (contact) => {
+export const createContact = async (contact: Omit<ContactType, "id" | "favorite">) => {
   const response = await api.post("/contacts", contact, {
     headers: {
       "Content-Type": "application/json",
@@ -28,7 +29,7 @@ export const createContact = async (contact) => {
   return response.data;
 };
 
-export const updateContact = async (contact) => {
+export const updateContact = async (contact: FormDataType) => {
   const response = await api.put("/contacts", contact, {
     headers: {
       "Content-Type": "application/json",

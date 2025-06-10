@@ -12,19 +12,11 @@ import TableActionsCell from "../../molecules/TableActionsCell/TableActionsCell"
 import "./../../contactlisttable.css";
 import { fetchContacts } from "../../../utils/api";
 import RefreshDataContext from "../../../contexts/RefreshDataContext/RefreshDataContext";
+import type { ContactType } from "../../../types/interfaces";
 
 interface ContactListTableProps {
   searchTerm: string;
   isFavoriteTab: boolean;
-}
-
-interface RowData {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  company: string;
-  favorite: boolean;
 }
 
 const ContactListTable: FunctionComponent<ContactListTableProps> = ({
@@ -58,7 +50,7 @@ const ContactListTable: FunctionComponent<ContactListTableProps> = ({
             </TableHead>
             <TableBody>
               {filteredContacts.map(
-                (row: RowData) => (
+                (row: Omit<ContactType, "id"> & { id: string }) => (
                   <TableRow
                     hover
                     key={row.id}

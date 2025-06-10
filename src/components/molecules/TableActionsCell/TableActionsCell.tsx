@@ -8,17 +8,11 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import { toggleFavorite } from "../../../utils/api";
 import RefreshDataContext from "../../../contexts/RefreshDataContext/RefreshDataContext";
+import type { ContactType } from "../../../types/interfaces";
 
 interface TableActionsCellProps {
   showActionId: string;
-  rowData: {
-    id: string;
-    name: string;
-    phone: string;
-    email?: string;
-    company?: string;
-    favorite: boolean;
-  };
+  rowData: Omit<ContactType, "id"> & { id: string };
 }
 
 const TableActionsCell: FunctionComponent<TableActionsCellProps> = ({

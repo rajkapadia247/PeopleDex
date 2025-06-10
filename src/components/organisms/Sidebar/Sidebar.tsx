@@ -3,8 +3,7 @@ import ActionButton from "../../atoms/ActionButton/ActionButton";
 import "./../../sidebar.css";
 import ActiveTabContext from "../../../contexts/ActiveTabContext/ActiveTabContext";
 import { Button } from "@mui/material";
-import { useAuth } from "../../../auth/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../contexts/AuthContext/useAuth";
 
 interface SidebarProps {}
 
@@ -16,7 +15,6 @@ const sideBarItems = [
 const Sidebar: FunctionComponent<SidebarProps> = () => {
   const { activeTab, setActiveTab } = useContext(ActiveTabContext);
   const { logout } = useAuth();
-  const navigate = useNavigate()
   const handleLogout = () => {
     logout();
   };

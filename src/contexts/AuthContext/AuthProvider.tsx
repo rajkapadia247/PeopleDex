@@ -1,10 +1,15 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import api from "../api/axios";
+import { useEffect, useState, type FunctionComponent } from "react";
+import api from "../../api/axios";
+import AuthContext from "./AuthContext";
 
-const AuthContext = createContext<any>(null);
+interface AuthProviderProps {
+  children: React.ReactNode;
+}
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+const AuthProvider: FunctionComponent<AuthProviderProps> = ({
+  children,
+}) =>{
+  const [user, setUser] = useState<object | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -22,7 +27,7 @@ export const AuthProvider = ({ children }) => {
       .finally(() => setLoading(false));
   }, []);
 
-  const login = ({ token, user }) => {
+  const login = ({ token, user }: { token: string, user: object}) => {
     localStorage.setItem("token", token);
     setUser(user);
   };
@@ -39,4 +44,4 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export default AuthProvider;

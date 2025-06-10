@@ -1,6 +1,6 @@
 import { useState, type FunctionComponent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../../auth/AuthContext";
+import { useAuth } from "../../../contexts/AuthContext/useAuth";
 import api from "../../../api/axios";
 
 interface LoginProps {}
@@ -11,17 +11,17 @@ const Login: FunctionComponent<LoginProps> = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const res = await api.post("/api/login", form);
       login(res.data);
       navigate("/");
-    } catch (err) {
+    } catch (err: any) {
       setError(err.response?.data?.message || "Login failed");
     }
   };

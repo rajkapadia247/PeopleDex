@@ -9,18 +9,13 @@ import {
 import CreateEditForm from "../../molecules/CreateEditForm/CreateEditForm";
 import { createContact, updateContact } from "../../../utils/api";
 import RefreshDataContext from "../../../contexts/RefreshDataContext/RefreshDataContext";
+import type { FormDataType } from "../../../types/interfaces";
 
 interface CreateEditModalProps {
   isOpen: boolean;
   handleClose: () => void;
   isEdit: boolean;
-  editData?: {
-    id: string;
-    name: string;
-    phone: string;
-    email?: string;
-    company?: string;
-  };
+  editData?: FormDataType;
 }
 
 const initialFormData = {
@@ -36,7 +31,7 @@ const CreateEditModal: FunctionComponent<CreateEditModalProps> = ({
   isEdit,
   editData,
 }) => {
-  const [formData, setFormData] = useState(isEdit ? editData : initialFormData);
+  const [formData, setFormData] = useState(isEdit && editData ? editData : initialFormData);
   const { incrementRefreshKey } = useContext(RefreshDataContext);
   const onClose = () => {
     handleClose();
