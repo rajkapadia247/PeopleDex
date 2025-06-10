@@ -6,9 +6,9 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
-import CreateEditForm from "./CreateEditForm";
-import { createContact, updateContact } from "../utils/api";
-import RefreshDataContext from "../contexts/RefreshDataContext";
+import CreateEditForm from "../../molecules/CreateEditForm/CreateEditForm";
+import { createContact, updateContact } from "../../../utils/api";
+import RefreshDataContext from "../../../contexts/RefreshDataContext";
 
 interface CreateEditModalProps {
   isOpen: boolean;

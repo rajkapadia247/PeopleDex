@@ -1,15 +1,13 @@
-import { IconButton, Menu, MenuItem } from "@mui/material";
+import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-
 import { useContext, useState, type FunctionComponent } from "react";
-import CreateEditModal from "./CreateEditModal";
-import DeleteModal from "./DeleteModal";
+import CreateEditModal from "../../organisms/CreateEditModal/CreateEditModal";
+import DeleteModal from "../DeleteModal/DeleteModal";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
-import { toggleFavorite } from "../utils/api";
-import RefreshDataContext from "../contexts/RefreshDataContext";
+import { toggleFavorite } from "../../../utils/api";
+import RefreshDataContext from "../../../contexts/RefreshDataContext";
 
 interface TableActionsCellProps {
   showActionId: string;

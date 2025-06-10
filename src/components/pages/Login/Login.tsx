@@ -1,7 +1,7 @@
 import { useState, type FunctionComponent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthContext";
-import api from "../api/axios";
+import { useAuth } from "../../../auth/AuthContext";
+import api from "../../../api/axios";
 
 interface LoginProps {}
 
@@ -13,7 +13,7 @@ const Login: FunctionComponent<LoginProps> = () => {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,27 +28,32 @@ const Login: FunctionComponent<LoginProps> = () => {
 
   return (
     <div className="auth-wrapper">
-      <h2>Login</h2>
+      <h2>Sign in</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
         <input
           name="email"
           type="email"
-          placeholder="Email"
+          placeholder="your@email.com"
           onChange={handleChange}
           required
         />
+        <label htmlFor="password">Password</label>
         <input
           name="password"
           type="password"
-          placeholder="Password"
+          placeholder="••••••"
           onChange={handleChange}
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit">Sign in</button>
       </form>
       <p>
-        No account? <Link to="/register">Register</Link>
+        <Link to="/login">Forgot your password?</Link>
+      </p>
+      <p>
+        Don't have an account? <Link to="/register">Sign up</Link>
       </p>
     </div>
   );

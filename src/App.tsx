@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./auth/AuthContext";
-import ContactsPage from "./components/ContactsPage";
-import Register from "./auth/Register";
-import Login from "./auth/Login";
+import ContactsPage from "./components/pages/ContactsPage/ContactsPage";
+import Register from "./components/pages/Register/Register";
+import Login from "./components/pages/Login/Login";
 import ProtectedRoute from "./auth/ProtectedRoute";
 
 function App() {

@@ -7,8 +7,8 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { useContext, type FunctionComponent } from "react";
-import { deleteContact } from "../utils/api";
-import RefreshDataContext from "../contexts/RefreshDataContext";
+import { deleteContact } from "../../../utils/api";
+import RefreshDataContext from "../../../contexts/RefreshDataContext";
 
 interface DeleteModalProps {
   isOpen: boolean;

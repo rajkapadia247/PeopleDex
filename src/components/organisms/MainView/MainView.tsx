@@ -1,9 +1,9 @@
 import { useContext, useMemo, useState, type FunctionComponent } from "react";
-import ContactListTable from "./ContactListTable";
-import "./mainview.css";
-import Search from "./Search";
-import ActiveTabContext from "../contexts/ActiveTabContext";
-import { debounce } from "../utils/utils";
+import ContactListTable from "../ContactListTable/ContactListTable";
+import "./../../mainview.css";
+import Search from "../../molecules/Search/Search";
+import ActiveTabContext from "../../../contexts/ActiveTabContext";
+import { debounce } from "../../../utils/utils";
 interface MainViewProps {}
 
 const items = [

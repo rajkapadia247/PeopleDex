@@ -8,10 +8,10 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import TableActionsCell from "./TableActionsCell";
-import "./contactlisttable.css";
-import { fetchContacts } from "../utils/api";
-import RefreshDataContext from "../contexts/RefreshDataContext";
+import TableActionsCell from "../../molecules/TableActionsCell/TableActionsCell";
+import "./../../contactlisttable.css";
+import { fetchContacts } from "../../../utils/api";
+import RefreshDataContext from "../../../contexts/RefreshDataContext";
 
 interface ContactListTableProps {
   searchTerm: string;

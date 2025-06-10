@@ -1,9 +1,9 @@
 import { useContext, type FunctionComponent } from "react";
-import ActionButton from "./ActionButton";
-import "./sidebar.css";
-import ActiveTabContext from "../contexts/ActiveTabContext";
+import ActionButton from "../../atoms/ActionButton/ActionButton";
+import "./../../sidebar.css";
+import ActiveTabContext from "../../../contexts/ActiveTabContext";
 import { Button } from "@mui/material";
-import { useAuth } from "../auth/AuthContext";
+import { useAuth } from "../../../auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 interface SidebarProps {}

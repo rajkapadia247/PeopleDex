@@ -1,7 +1,7 @@
 import { useState, type FunctionComponent } from "react";
-import "./actionbutton.css";
+import "./../../actionbutton.css";
 import { Button } from "@mui/material";
-import CreateEditModal from "./CreateEditModal";
+import CreateEditModal from "../../organisms/CreateEditModal/CreateEditModal";
 interface ActionButtonProps {}
 
 const ActionButton: FunctionComponent<ActionButtonProps> = () => {
