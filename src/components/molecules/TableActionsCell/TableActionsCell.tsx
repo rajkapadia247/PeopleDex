@@ -7,7 +7,7 @@ import DeleteModal from "../DeleteModal/DeleteModal";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarIcon from "@mui/icons-material/Star";
 import { toggleFavorite } from "../../../utils/api";
-import RefreshDataContext from "../../../contexts/RefreshDataContext";
+import RefreshDataContext from "../../../contexts/RefreshDataContext/RefreshDataContext";
 
 interface TableActionsCellProps {
   showActionId: string;

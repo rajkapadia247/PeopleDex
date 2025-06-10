@@ -11,7 +11,7 @@ import {
 import TableActionsCell from "../../molecules/TableActionsCell/TableActionsCell";
 import "./../../contactlisttable.css";
 import { fetchContacts } from "../../../utils/api";
-import RefreshDataContext from "../../../contexts/RefreshDataContext";
+import RefreshDataContext from "../../../contexts/RefreshDataContext/RefreshDataContext";
 
 interface ContactListTableProps {
   searchTerm: string;

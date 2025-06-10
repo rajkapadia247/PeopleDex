@@ -1,7 +1,7 @@
 import { useContext, type FunctionComponent } from "react";
 import ActionButton from "../../atoms/ActionButton/ActionButton";
 import "./../../sidebar.css";
-import ActiveTabContext from "../../../contexts/ActiveTabContext";
+import ActiveTabContext from "../../../contexts/ActiveTabContext/ActiveTabContext";
 import { Button } from "@mui/material";
 import { useAuth } from "../../../auth/AuthContext";
 import { useNavigate } from "react-router-dom";
