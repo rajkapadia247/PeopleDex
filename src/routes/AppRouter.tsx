@@ -5,18 +5,20 @@ import ContactsPage from "../components/pages/ContactsPage/ContactsPage";
 import ProtectedRoute from "./ProtectedRoute";
 import Login from "../components/pages/Login/Login";
 
-interface AppRouterProps {
-  
-}
- 
+interface AppRouterProps {}
+
 const AppRouter: FunctionComponent<AppRouterProps> = () => {
-  return (<BrowserRouter><Routes>
-    <Route path="/login" element={<Login />} />
-    <Route path="/register" element={<Register />} />
-    <Route path="/" element={<ProtectedRoute />}>
-      <Route path="/" element={<ContactsPage />} />
-    </Route>
-  </Routes></BrowserRouter>);
-}
- 
+  return (
+    <BrowserRouter basename="/peopledex">
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<ProtectedRoute />}>
+          <Route path="/" element={<ContactsPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
 export default AppRouter;
