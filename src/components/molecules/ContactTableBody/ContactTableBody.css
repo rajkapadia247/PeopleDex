@@ -1,0 +1,126 @@
+.contact-table-row {
+  height: 72px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.contact-table-row:hover {
+  background-color: var(--surface-hover);
+}
+
+.contact-table-row:last-child {
+  border-bottom: none;
+}
+
+.contact-table-cell {
+  padding: 16px 20px;
+  vertical-align: middle;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.contact-table-cell:last-child {
+  text-align: right;
+}
+
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contact-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.contact-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 15px;
+}
+
+.contact-email,
+.contact-phone,
+.contact-company {
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+}
+
+.contact-phone {
+  font-family: "Courier New", monospace;
+}
+
+.avatar-blue {
+  background-color: var(--avatar-blue);
+}
+.avatar-violet {
+  background-color: var(--avatar-violet);
+}
+.avatar-red {
+  background-color: var(--avatar-red);
+}
+.avatar-teal {
+  background-color: var(--avatar-teal);
+}
+.avatar-cyan {
+  background-color: var(--avatar-cyan);
+}
+.avatar-green {
+  background-color: var(--avatar-green);
+}
+.avatar-orange {
+  background-color: var(--avatar-orange);
+}
+.avatar-grape {
+  background-color: var(--avatar-grape);
+}
+.avatar-indigo {
+  background-color: var(--avatar-indigo);
+}
+.avatar-pink {
+  background-color: var(--avatar-pink);
+}
+
+@media (max-width: 768px) {
+  .contact-table-cell {
+    padding: 12px 16px;
+  }
+
+  .contact-info {
+    gap: 8px;
+  }
+
+  .contact-avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+
+  .contact-name {
+    font-size: 14px;
+  }
+
+  .contact-email,
+  .contact-phone,
+  .contact-company {
+    font-size: 13px;
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-table-cell {
+    padding: 8px;
+  }
+}

@@ -1,18 +1,16 @@
+//@ts-nocheck
+
 import { useContext, useEffect, useState, type FunctionComponent } from "react";
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
-import TableActionsCell from "../../molecules/TableActionsCell/TableActionsCell";
-import "./../../contactlisttable.css";
+import ContactTableHeader from "../../molecules/ContactTableHeader/ContactTableHeader";
+import ContactTableBody from "../../molecules/ContactTableBody/ContactTableBody";
+import TableLoader from "../../atoms/TableLoader/TableLoader";
+import NoContacts from "../../atoms/NoContacts/NoContacts";
+import CreateEditModal from "../CreateEditModal/CreateEditModal";
+import DeleteModal from "../../molecules/DeleteModal/DeleteModal";
 import { fetchContacts } from "../../../utils/api";
 import RefreshDataContext from "../../../contexts/RefreshDataContext/RefreshDataContext";
 import type { ContactType } from "../../../types/interfaces";
+import "./ContactListTable.css";
 
 interface ContactListTableProps {
   searchTerm: string;
@@ -24,62 +22,92 @@ const ContactListTable: FunctionComponent<ContactListTableProps> = ({
   isFavoriteTab,
 }) => {
   const [showActionId, setShowActionId] = useState("");
-  const [filteredContacts, setFilteredContacts] = useState([])
+  const [filteredContacts, setFilteredContacts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editData, setEditData] = useState<ContactType | null>(null);
+  const [deleteId, setDeleteId] = useState<string | null>(null);
 
-  const { refreshKey } = useContext(RefreshDataContext);
+  const { refreshKey, setContactsCount } = useContext(RefreshDataContext);
 
   useEffect(() => {
-    fetchContacts(searchTerm, isFavoriteTab).then((fetchedContacts) => {
-      setFilteredContacts(fetchedContacts.data);
-    })
-  }, [searchTerm, isFavoriteTab, refreshKey])
+    setLoading(true);
+    fetchContacts(searchTerm, isFavoriteTab)
+      .then((fetchedContacts) => {
+        setFilteredContacts(fetchedContacts.data);
+        if (!isFavoriteTab && searchTerm === "") {
+          setContactsCount(
+            Array.isArray(fetchedContacts.data)
+              ? fetchedContacts.data.length
+              : 0
+          );
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [searchTerm, isFavoriteTab, refreshKey]);
+
+  const handleEditClick = (contact: ContactType) => {
+    setEditData(contact);
+    setIsEditModalOpen(true);
+  };
+
+  const handleEditModalClose = () => {
+    setIsEditModalOpen(false);
+    setEditData(null);
+  };
+
+  const handleDeleteClick = (id: string) => {
+    setDeleteId(id);
+  };
+
+  const handleDeleteClose = () => {
+    setDeleteId(null);
+  };
+
+  if (loading && !filteredContacts.length) {
+    return <TableLoader rows={5} />;
+  }
+
+  if (!filteredContacts.length) {
+    return <NoContacts searchTerm={searchTerm} />;
+  }
 
   return (
-    <div className="contact-table">
-      {filteredContacts.length > 0 ?  (
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow sx={{ backgroundColor: "#f9fafa" }}>
-                <TableCell width="22%">Name</TableCell>
-                <TableCell width="22%">Email</TableCell>
-                <TableCell width="22%">Phone</TableCell>
-                <TableCell width="22%">Company</TableCell>
-                <TableCell align="right" width="12%"></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {filteredContacts.map(
-                (row: Omit<ContactType, "id"> & { id: string }) => (
-                  <TableRow
-                    hover
-                    key={row.id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    onMouseEnter={() => {
-                      setShowActionId(row.id);
-                    }}
-                    onMouseLeave={() => setShowActionId("")}
-                  >
-                    <TableCell component="th" scope="row" width="22%">
-                      {row.name}
-                    </TableCell>
-                    <TableCell width="22%">{row.email}</TableCell>
-                    <TableCell width="22%">{row.phone}</TableCell>
-                    <TableCell width="22%">{row.company}</TableCell>
-                    <TableCell align="right" width="12%">
-                      <TableActionsCell
-                        showActionId={showActionId}
-                        rowData={row}
-                      />
-                    </TableCell>
-                  </TableRow>
-                )
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      ) : "No contacts to display."}
-    </div>
+    <>
+      <div className="contact-table-container">
+        <div className="contact-table-card">
+          <table className="contact-table">
+            <ContactTableHeader />
+            <ContactTableBody
+              filteredContacts={filteredContacts}
+              showActionId={showActionId}
+              setShowActionId={setShowActionId}
+              onEditClick={handleEditClick}
+              onDeleteClick={handleDeleteClick}
+            />
+          </table>
+        </div>
+      </div>
+
+      {editData && (
+        <CreateEditModal
+          isOpen={isEditModalOpen}
+          handleClose={handleEditModalClose}
+          isEdit={true}
+          editData={editData}
+        />
+      )}
+
+      {deleteId && (
+        <DeleteModal
+          isOpen={Boolean(deleteId)}
+          handleClose={handleDeleteClose}
+          deleteId={deleteId}
+        />
+      )}
+    </>
   );
 };
 

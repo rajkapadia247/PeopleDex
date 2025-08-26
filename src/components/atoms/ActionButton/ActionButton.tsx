@@ -1,21 +1,35 @@
-import { useState, type FunctionComponent } from "react";
-import "./../../actionbutton.css";
-import { Button } from "@mui/material";
-import CreateEditModal from "../../organisms/CreateEditModal/CreateEditModal";
-interface ActionButtonProps {}
+//@ts-nocheck
 
-const ActionButton: FunctionComponent<ActionButtonProps> = () => {
+import { useState, type FunctionComponent } from "react";
+import CreateEditModal from "../../organisms/CreateEditModal/CreateEditModal";
+import "../../actionbutton.css";
+
+interface ActionButtonProps {
+  label?: string;
+}
+
+const ActionButton: FunctionComponent<ActionButtonProps> = ({
+  label = "Add New Contact",
+}) => {
   const [isOpen, setIsOpen] = useState(false);
+
   const handleCreateClick = () => {
     setIsOpen(true);
-  }
+  };
 
   return (
     <>
-      <Button variant="contained" size="large" fullWidth onClick={handleCreateClick}>
-        Create New Contact
-      </Button>
-      <CreateEditModal isOpen={isOpen} handleClose={() => {setIsOpen(false)}} isEdit={false}/>
+      <button className="action-button" onClick={handleCreateClick}>
+        <ion-icon name="add-outline" size="large" />
+        {label}
+      </button>
+      <CreateEditModal
+        isOpen={isOpen}
+        handleClose={() => {
+          setIsOpen(false);
+        }}
+        isEdit={false}
+      />
     </>
   );
 };

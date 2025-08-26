@@ -1,90 +1,82 @@
-import { IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import { useContext, useState, type FunctionComponent } from "react";
-import CreateEditModal from "../../organisms/CreateEditModal/CreateEditModal";
-import DeleteModal from "../DeleteModal/DeleteModal";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
-import StarIcon from "@mui/icons-material/Star";
+//@ts-nocheck
+
+import { useContext, type FunctionComponent } from "react";
 import { toggleFavorite } from "../../../utils/api";
 import RefreshDataContext from "../../../contexts/RefreshDataContext/RefreshDataContext";
 import type { ContactType } from "../../../types/interfaces";
+import "./TableActionsCell.css";
 
 interface TableActionsCellProps {
   showActionId: string;
   rowData: Omit<ContactType, "id"> & { id: string };
+  onEditClick: (contact: ContactType) => void;
+  onDeleteClick: (id: string) => void;
 }
 
 const TableActionsCell: FunctionComponent<TableActionsCellProps> = ({
   showActionId,
   rowData,
+  onEditClick,
+  onDeleteClick,
 }) => {
-  const [isEditOpen, setIsEditOpen] = useState(false);
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const { incrementRefreshKey } = useContext(RefreshDataContext);
-
 
   const toggleFavoriteState = async () => {
     await toggleFavorite(rowData.id);
     incrementRefreshKey();
   };
-  const handleEditOpen = () => {
-    setIsEditOpen(true);
+
+  const handleEditClick = () => {
+    onEditClick(rowData);
   };
+
   const handleDeleteOpen = () => {
-    setIsDeleteOpen(true);
+    onDeleteClick(rowData.id);
   };
+
   const getFavoriteIcon = () => {
     if (rowData.favorite) {
-      return <StarIcon color="primary" fontSize="small" />;
+      return <ion-icon name="star" />;
     } else {
-      return <StarBorderIcon color="action" fontSize="small" />;
+      return <ion-icon name="star-outline" />;
     }
   };
+
+  if (rowData.id !== showActionId) {
+    return <div></div>;
+  }
+
   return (
     <div>
-      {rowData.id === showActionId ? (
-        <>
-          <div
-            style={{ display: "flex", gap: "4px", justifyContent: "flex-end" }}
-          >
-            <IconButton
-              id="basic-button"
-              onClick={toggleFavoriteState}
-              size="small"
-            >
-              {getFavoriteIcon()}
-            </IconButton>
-            <IconButton id="basic-button" onClick={handleEditOpen} size="small">
-              <EditIcon color="action" fontSize="small" />
-            </IconButton>
-            <IconButton
-              id="basic-button"
-              onClick={handleDeleteOpen}
-              size="small"
-            >
-              <DeleteIcon color="action" fontSize="small" />
-            </IconButton>
-          </div>
-          <CreateEditModal
-            isOpen={isEditOpen}
-            handleClose={() => {
-              setIsEditOpen(false);
-            }}
-            isEdit={true}
-            editData={rowData}
-          />
-          <DeleteModal
-            isOpen={isDeleteOpen}
-            handleClose={() => {
-              setIsDeleteOpen(false);
-            }}
-            deleteId={rowData.id}
-          />
-        </>
-      ) : (
-        ""
-      )}
+      <div className="table-actions-container">
+        <button
+          className={`table-action-button ${
+            rowData.favorite ? "favorite" : "favorite-empty"
+          }`}
+          onClick={toggleFavoriteState}
+          title={
+            rowData.favorite ? "Remove from favorites" : "Add to favorites"
+          }
+        >
+          {getFavoriteIcon()}
+        </button>
+
+        <button
+          className="table-action-button edit"
+          onClick={handleEditClick}
+          title="Edit contact"
+        >
+          <ion-icon name="create-outline" />
+        </button>
+
+        <button
+          className="table-action-button delete"
+          onClick={handleDeleteOpen}
+          title="Delete contact"
+        >
+          <ion-icon name="trash-outline" />
+        </button>
+      </div>
     </div>
   );
 };

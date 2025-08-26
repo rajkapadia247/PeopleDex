@@ -1,53 +1,63 @@
-import { useContext, type FunctionComponent } from "react";
+//@ts-nocheck
+
+import { useContext, useEffect, useState, type FunctionComponent } from "react";
 import ActionButton from "../../atoms/ActionButton/ActionButton";
-import "./../../sidebar.css";
+import Logo from "../../atoms/Logo/Logo";
 import ActiveTabContext from "../../../contexts/ActiveTabContext/ActiveTabContext";
-import { Button } from "@mui/material";
+import { useAuth } from "../../../contexts/AuthContext/useAuth";
+import RefreshDataContext from "../../../contexts/RefreshDataContext/RefreshDataContext";
+import "../../sidebar.css";
 
 interface SidebarProps {}
 
 const sideBarItems = [
-  { name: "All Contacts", term: "all" },
-  { name: "Favorites", term: "fav" },
+  {
+    name: "All Contacts",
+    term: "all",
+    icon: <ion-icon name="people-outline" />,
+  },
+  { name: "Favorites", term: "fav", icon: <ion-icon name="star-outline" /> },
 ];
 
 const Sidebar: FunctionComponent<SidebarProps> = () => {
   const { activeTab, setActiveTab } = useContext(ActiveTabContext);
+  const { contactsCount } = useContext(RefreshDataContext);
+
   return (
     <div className="sidebar">
-      <h1 className="sidebar-header">Contacts</h1>
-      <ul className="sidebar-list">
-        {sideBarItems.map((item, index) => {
-          const isActiveTab = item.term === activeTab;
-          return (
-            <li
-              key={index}
-              className={`sidebar-list-item ${
-                isActiveTab ? "selected" : ""
-              }`}
-            >
-              <Button
-                sx={{
-                  color: "unset",
-                  margin: "unset",
-                  padding: "unset",
-                  ":hover": {
-                    backgroundColor: "unset"
-                  }
-                }}
-                disableRipple
-                onClick={() => {
-                  if (!isActiveTab) setActiveTab(item.term);
-                }}
-              >
-                {item.name}
-              </Button>
-            </li>
-          );
-        })}
-      </ul>
-      <div className="sidebar-action-button-container">
+      <div className="sidebar-header">
+        <Logo size="medium" className="sidebar-logo" />
+      </div>
+
+      <div className="sidebar-nav">
         <ActionButton />
+        <ul className="sidebar-list">
+          {sideBarItems.map((item) => {
+            const isActiveTab = item.term === activeTab;
+            return (
+              <li key={item.term} className="sidebar-list-item">
+                <button
+                  className={`sidebar-list-button ${
+                    isActiveTab ? "selected" : ""
+                  }`}
+                  onClick={() => {
+                    if (!isActiveTab) setActiveTab(item.term);
+                  }}
+                >
+                  <div className="sidebar-list-icon">{item.icon}</div>
+                  <span className="sidebar-list-text">
+                    {item.name}
+                    {item.term === "all" && (
+                      <span className="sidebar-count-badge">
+                        {contactsCount ?? "-"}
+                      </span>
+                    )}
+                  </span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );

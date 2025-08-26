@@ -1,0 +1,66 @@
+.contact-table-container {
+  min-height: 0;
+  overflow: hidden;
+  background-color: white;
+}
+
+.contact-table-card {
+  border-radius: 12px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.contact-table {
+  width: 100%;
+  border-collapse: collapse;
+  display: flex;
+  flex-direction: column;
+  background: white;
+}
+
+.contact-table thead {
+  flex-shrink: 0;
+  background: white;
+}
+
+.contact-table tbody {
+  flex: 1;
+  overflow-y: auto;
+  display: block;
+  min-height: 0;
+  max-height: calc(100vh - 180px);
+  background: white;
+}
+
+.contact-table thead tr,
+.contact-table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  background: white;
+}
+
+.contact-table th,
+.contact-table td {
+  text-align: left;
+  vertical-align: middle;
+}
+
+.contact-table tbody td:first-child,
+.contact-table tbody td:nth-child(2) {
+  width: 25%;
+}
+
+.contact-table tbody td:nth-child(3),
+.contact-table tbody td:nth-child(4) {
+  width: 20%;
+}
+
+.contact-table tbody td:last-child {
+  width: 10%;
+  text-align: right;
+}

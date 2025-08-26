@@ -1,0 +1,51 @@
+.table-actions-container {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.table-action-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.table-action-button:hover {
+  background: var(--surface-hover);
+}
+
+.table-action-button svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--text-muted);
+}
+
+.table-action-button.favorite svg {
+  fill: var(--warning);
+}
+
+.table-action-button.favorite-empty svg {
+  fill: var(--text-subtle);
+}
+
+.table-action-button.edit:hover svg {
+  fill: var(--primary);
+}
+
+.table-action-button.delete:hover {
+  background: var(--error-light);
+}
+
+.table-action-button.delete:hover svg {
+  fill: var(--error);
+}
+
+.table-action-button.favorite:hover {
+  background: var(--warning-light);
+}

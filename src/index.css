@@ -1,4 +1,54 @@
+:root {
+  --background: #f8f9fa;
+  --surface: #ffffff;
+  --surface-hover: #f1f3f5;
+
+  --border: #dee2e6;
+  --border-light: #e9ecef;
+  --border-subtle: #ced4da;
+
+  --text-primary: #212529;
+  --text-secondary: #495057;
+  --text-muted: #868e96;
+  --text-subtle: #adb5bd;
+
+  --primary: #228be6;
+  --primary-hover: #1c7ed6;
+  --primary-active: #1971c2;
+  --primary-light: #d0ebff;
+  --primary-subtle: #e7f5ff;
+
+  --error: #fa5252;
+  --error-hover: #f03e3e;
+  --error-light: #ffe3e3;
+  --error-subtle: #fff5f5;
+  --error-text: #c92a2a;
+  --error-border: #ffa8a8;
+
+  --success: #40c057;
+  --success-light: #d3f9d8;
+  --success-subtle: #ebfbee;
+  --success-text: #2b8a3e;
+  --success-border: #8ce99a;
+
+  --warning: #fab005;
+  --warning-light: #ffe8cc;
+  --warning-subtle: #fff4e6;
+
+  --avatar-blue: #228be6;
+  --avatar-violet: #7950f2;
+  --avatar-red: #ff6b6b;
+  --avatar-teal: #12b886;
+  --avatar-cyan: #15aabf;
+  --avatar-green: #40c057;
+  --avatar-orange: #fd7e14;
+  --avatar-grape: #be4bdb;
+  --avatar-indigo: #4c6ef5;
+  --avatar-pink: #e64980;
+}
+
 body {
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    sans-serif;
 }

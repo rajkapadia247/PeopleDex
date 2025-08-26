@@ -1,5 +1,12 @@
-import { createContext } from 'react';
+import { createContext } from "react";
 
-const RefreshDataContext = createContext<any>(null);
+interface RefreshDataContextValue {
+  refreshKey: number;
+  incrementRefreshKey: () => void;
+  contactsCount: number | null;
+  setContactsCount: (count: number | null) => void;
+}
+
+const RefreshDataContext = createContext<RefreshDataContextValue | null>(null);
 
 export default RefreshDataContext;

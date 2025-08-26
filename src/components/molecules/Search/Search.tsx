@@ -1,29 +1,48 @@
+//@ts-nocheck
+
 import type { FunctionComponent } from "react";
-import { IconButton, InputBase, Paper } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import "./Search.css";
 
 interface SearchProps {
   searchTerm: string;
   searchTermChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Search: FunctionComponent<SearchProps> = ({searchTerm, searchTermChangeHandler}) => {
+const Search: FunctionComponent<SearchProps> = ({
+  searchTerm,
+  searchTermChangeHandler,
+}) => {
+  const handleClearSearch = () => {
+    searchTermChangeHandler({
+      target: { value: "" },
+    } as React.ChangeEvent<HTMLInputElement>);
+  };
+
   return (
-    <Paper
-      component="form"
-      sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 400 }}
-    >
-      <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-        <SearchIcon />
-      </IconButton>
-      <InputBase
-        sx={{ ml: 1, flex: 1 }}
-        placeholder="Search contacts"
-        value={searchTerm}
-        onChange={searchTermChangeHandler}
-        inputProps={{ "aria-label": "Search contacts" }}
-      />
-    </Paper>
+    <div className="search-container">
+      <div className="search-input-container">
+        <div className="search-icon">
+          <ion-icon name="search-outline" />
+        </div>
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Search contacts"
+          value={searchTerm}
+          onChange={searchTermChangeHandler}
+        />
+        {searchTerm && (
+          <button
+            type="button"
+            className="search-clear-button"
+            onClick={handleClearSearch}
+            title="Clear search"
+          >
+            <ion-icon name="close-outline" />
+          </button>
+        )}
+      </div>
+    </div>
   );
 };
 

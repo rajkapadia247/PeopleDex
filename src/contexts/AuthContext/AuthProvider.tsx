@@ -6,9 +6,7 @@ interface AuthProviderProps {
   children: React.ReactNode;
 }
 
-const AuthProvider: FunctionComponent<AuthProviderProps> = ({
-  children,
-}) =>{
+const AuthProvider: FunctionComponent<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<object | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -17,7 +15,7 @@ const AuthProvider: FunctionComponent<AuthProviderProps> = ({
     if (!token) return setLoading(false);
 
     api
-      .get("/api/me")
+      .get("/api/auth/me")
       .then((res) => {
         setUser(res.data);
       })
@@ -27,7 +25,7 @@ const AuthProvider: FunctionComponent<AuthProviderProps> = ({
       .finally(() => setLoading(false));
   }, []);
 
-  const login = ({ token, user }: { token: string, user: object}) => {
+  const login = ({ token, user }: { token: string; user: object }) => {
     localStorage.setItem("token", token);
     setUser(user);
   };
