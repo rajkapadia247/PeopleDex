@@ -9,7 +9,7 @@ interface AppRouterProps {}
 
 const AppRouter: FunctionComponent<AppRouterProps> = () => {
   return (
-    <BrowserRouter basename="/peopledex">
+    <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
