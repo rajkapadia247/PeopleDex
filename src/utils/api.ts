@@ -1,4 +1,4 @@
-import api from "../api/axios";
+import api from "../helpers/axios";
 import type { ContactType, FormDataType } from "../types/interfaces";
 
 export const fetchContacts = async (
@@ -17,7 +17,9 @@ export const fetchContacts = async (
   return response.data;
 };
 
-export const createContact = async (contact: Omit<ContactType, "id" | "favorite">) => {
+export const createContact = async (
+  contact: Omit<ContactType, "id" | "favorite">
+) => {
   const response = await api.post("/contacts", contact, {
     headers: {
       "Content-Type": "application/json",
@@ -42,12 +44,9 @@ export const updateContact = async (contact: FormDataType) => {
 };
 
 export const deleteContact = async (id: string) => {
-  const response = await api.delete(
-    "/contacts",
-    {
-      data: { id },
-    }
-  );
+  const response = await api.delete("/contacts", {
+    data: { id },
+  });
   if (response.status !== 200) {
     throw new Error("Failed to delete contact");
   }
@@ -57,7 +56,7 @@ export const deleteContact = async (id: string) => {
 export const toggleFavorite = async (id: string) => {
   const response = await api.patch("/contacts/favorite", {
     id,
-  })
+  });
   if (response.status !== 200) {
     throw new Error("Failed to toggle favorite status");
   }

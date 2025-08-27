@@ -1,7 +1,7 @@
 import { useState, type FunctionComponent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext/useAuth";
-import api from "../../../api/axios";
+import api from "../../../helpers/axios";
 import Footer from "../../molecules/Footer/Footer";
 import Logo from "../../atoms/Logo/Logo";
 import GoogleSignInButton from "../../atoms/GoogleSignInButton/GoogleSignInButton";
@@ -26,7 +26,7 @@ const Login: FunctionComponent<LoginProps> = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await api.post("/api/auth/login", form);
+      const res = await api.post("/auth/login", form);
       login(res.data);
       navigate("/");
     } catch (err: any) {

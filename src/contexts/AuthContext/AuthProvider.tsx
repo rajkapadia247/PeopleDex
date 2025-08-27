@@ -1,5 +1,5 @@
 import { useEffect, useState, type FunctionComponent } from "react";
-import api from "../../api/axios";
+import api from "../../helpers/axios";
 import AuthContext from "./AuthContext";
 
 interface AuthProviderProps {
@@ -15,7 +15,7 @@ const AuthProvider: FunctionComponent<AuthProviderProps> = ({ children }) => {
     if (!token) return setLoading(false);
 
     api
-      .get("/api/auth/me")
+      .get("auth/me")
       .then((res) => {
         setUser(res.data);
       })

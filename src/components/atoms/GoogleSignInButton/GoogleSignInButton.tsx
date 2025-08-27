@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import api from "../../../api/axios";
+import api from "../../../helpers/axios";
 
 type Props = {
   onSignedIn: (user: { name: string; email: string; picture?: string }) => void;
@@ -20,7 +20,7 @@ export default function GoogleSignInButton({ onSignedIn }: Props) {
       client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
       callback: async (response: { credential: string }) => {
         try {
-          const res = await api.post("/api/auth/google/verify", {
+          const res = await api.post("/auth/google/verify", {
             idToken: response.credential,
             nonce,
           });
