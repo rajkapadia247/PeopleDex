@@ -15,7 +15,7 @@ const AuthProvider: FunctionComponent<AuthProviderProps> = ({ children }) => {
     if (!token) return setLoading(false);
 
     api
-      .get("auth/me")
+      .get("/auth/me")
       .then((res) => {
         setUser(res.data);
       })
