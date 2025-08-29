@@ -1,4 +1,31 @@
 .app-layout {
   display: flex;
-  justify-content: row;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app-content {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  min-height: 0;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .app-content {
+    overflow: hidden;
+  }
+
+  .app-content.sidebar-open {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-layout {
+    height: 100vh;
+    height: 100dvh;
+  }
 }

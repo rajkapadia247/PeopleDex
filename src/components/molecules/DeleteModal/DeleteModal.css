@@ -1,0 +1,95 @@
+.delete-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.delete-modal-content {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.delete-modal-header {
+  padding: 20px 24px 16px 24px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.delete-modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.delete-modal-body {
+  padding: 16px 24px 20px 24px;
+}
+
+.delete-modal-text {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.delete-modal-actions {
+  padding: 16px 24px 20px 24px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.delete-modal-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.delete-modal-button-cancel {
+  background: white;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.delete-modal-button-cancel:hover {
+  background: var(--surface-hover);
+}
+
+.delete-modal-button-delete {
+  background: var(--error);
+  color: white;
+}
+
+.delete-modal-button-delete:hover {
+  background: var(--error-hover);
+}
+
+@media (max-width: 768px) {
+  .delete-modal-content {
+    margin: 8px;
+  }
+
+  .delete-modal-actions {
+    flex-direction: column;
+  }
+
+  .delete-modal-button {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -13,9 +13,6 @@
 
 .mainview-header-container {
   display: flex;
-  gap: 2rem;
-}
-
-.contact-table {
-  padding: 2rem;
+  justify-content: space-between;
+  align-items: flex-end;
 }

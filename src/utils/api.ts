@@ -1,64 +1,64 @@
-const API_BASE_URL = "http://localhost:8080";
+import api from "../helpers/axios";
+import type { ContactType, FormDataType } from "../types/interfaces";
 
-export const fetchContacts = async (searchTerm: string, filterFavoritesOnly: boolean) => {
-  const response = await fetch(`${API_BASE_URL}/contacts?searchTerm=${searchTerm}&filterFavoritesOnly=${filterFavoritesOnly}`);
-  if (!response.ok) {
+export const fetchContacts = async (
+  searchTerm: string,
+  filterFavoritesOnly: boolean
+) => {
+  const response = await api.get("/contacts", {
+    params: {
+      searchTerm,
+      filterFavoritesOnly,
+    },
+  });
+  if (response.status !== 200 || !response.data) {
     throw new Error("Failed to fetch contacts");
   }
-  return response.json();
+  return response.data;
 };
 
-export const createContact = async (contact) => {
-  const response = await fetch(`${API_BASE_URL}/contacts`, {
-    method: "POST",
+export const createContact = async (
+  contact: Omit<ContactType, "id" | "favorite">
+) => {
+  const response = await api.post("/contacts", contact, {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(contact),
   });
-  if (!response.ok) {
+  if (response.status !== 200) {
     throw new Error("Failed to create contact");
   }
-  return response.json();
+  return response.data;
 };
 
-export const updateContact = async (contact) => {
-  const response = await fetch(`${API_BASE_URL}/contacts`, {
-    method: "PUT",
+export const updateContact = async (contact: FormDataType) => {
+  const response = await api.put("/contacts", contact, {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(contact),
   });
-  if (!response.ok) {
+  if (response.status !== 200) {
     throw new Error("Failed to update contact");
   }
-  return response.json();
-}
+  return response.data;
+};
 
 export const deleteContact = async (id: string) => {
-  const response = await fetch(`${API_BASE_URL}/contacts`, {
-    body: JSON.stringify({ id }),
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
+  const response = await api.delete("/contacts", {
+    data: { id },
   });
-  if (!response.ok) {
+  if (response.status !== 200) {
     throw new Error("Failed to delete contact");
   }
-}
+  return response.data;
+};
 
 export const toggleFavorite = async (id: string) => {
-  const response = await fetch(`${API_BASE_URL}/contacts/favorite`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ id }),
+  const response = await api.patch("/contacts/favorite", {
+    id,
   });
-  if (!response.ok) {
+  if (response.status !== 200) {
     throw new Error("Failed to toggle favorite status");
   }
-  return response.json();
+  return response.data;
 };

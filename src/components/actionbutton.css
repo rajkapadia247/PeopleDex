@@ -1,9 +1,47 @@
 .action-button {
-  background-color: #3864e5;
-  color: #f8fafd;
-  padding: 1rem 1.5rem;
-  font-size: 1rem;
+  background-color: var(--primary-light);
+  color: white;
+  padding: 12px 24px;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 16px;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.2s ease;
+  min-height: 44px;
+  box-sizing: border-box;
+  font-size: 15px;
   font-weight: 500;
+  color: var(--primary-active);
+}
+
+.action-button:hover {
+  background-color: #a5d8ff;
+}
+
+.action-button:active {
+  background-color: #a5d8ff;
+}
+
+.action-button svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .action-button {
+    padding: 10px 20px;
+    font-size: 13px;
+    min-height: 40px;
+  }
+
+  .action-button svg {
+    width: 16px;
+    height: 16px;
+  }
 }

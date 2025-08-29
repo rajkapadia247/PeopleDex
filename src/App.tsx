@@ -1,12 +1,12 @@
-import AppLayout from './components/AppLayout'
+import AuthProvider from "./contexts/AuthContext/AuthProvider";
+import AppRouter from "./routes/AppRouter";
 
 function App() {
-
   return (
-    <>
-      <AppLayout />
-    </>
-  )
+    <AuthProvider>
+      <AppRouter />
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
