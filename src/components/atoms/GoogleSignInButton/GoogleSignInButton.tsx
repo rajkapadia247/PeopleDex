@@ -1,51 +1,71 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import api from "../../../helpers/axios";
 
 type Props = {
-  onSignedIn: (user: { name: string; email: string; picture?: string }) => void;
+  onSignedIn: (userData: { token: string; user: object }) => void;
 };
+
+declare global {
+  interface Window {
+    google?: any;
+  }
+}
 
 export default function GoogleSignInButton({ onSignedIn }: Props) {
   const btnRef = useRef<HTMLButtonElement | null>(null);
 
+  const nonce = useMemo(() => {
+    const random = crypto.getRandomValues(new Uint32Array(1))[0].toString(16);
+    return random;
+  }, []);
+
+  const ensureScript = useCallback(() => {
+    if (window.google) {
+      return;
+    }
+    const existing = document.querySelector(
+      'script[src="https://accounts.google.com/gsi/client"]'
+    ) as HTMLScriptElement | null;
+    if (existing) {
+      return;
+    }
+    const script = document.createElement("script");
+    script.src = "https://accounts.google.com/gsi/client";
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  }, []);
+
   useEffect(() => {
-    // @ts-ignore - provided by the GIS script
-    if (!window.google || !btnRef.current) return;
+    ensureScript();
+  }, [ensureScript]);
 
-    const nonce = crypto.getRandomValues(new Uint32Array(1))[0].toString();
-
-    // @ts-ignore
-    window.google.accounts.id.initialize({
-      client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-      callback: async (response: { credential: string }) => {
-        try {
-          const res = await api.post("/auth/google/verify", {
-            idToken: response.credential,
-            nonce,
-          });
-          onSignedIn(res?.data?.userData);
-        } catch (err: any) {
-          console.error("Google sign-in failed");
-        }
-      },
-      nonce,
-      auto_select: false,
-      ux_mode: "popup",
-    });
-
+  useEffect(() => {
+    if (!btnRef.current) return;
     const handleClick = () => {
-      // @ts-ignore
-      window.google.accounts.id.prompt();
+      if (!window.google) return;
+      window.google.accounts.oauth2
+        .initTokenClient({
+          client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+          scope: "openid email profile",
+          callback: async (response: any) => {
+            try {
+              const res = await api.post("/auth/google/verify", {
+                access_token: response.access_token,
+                nonce,
+              });
+              onSignedIn(res?.data?.userData);
+            } catch (err) {
+              console.error("Google sign-in verification failed");
+            }
+          },
+        })
+        .requestAccessToken();
     };
-
-    btnRef.current.addEventListener("click", handleClick);
-
-    return () => {
-      if (btnRef.current) {
-        btnRef.current.removeEventListener("click", handleClick);
-      }
-    };
-  }, [onSignedIn]);
+    const btn = btnRef.current;
+    btn.addEventListener("click", handleClick);
+    return () => btn.removeEventListener("click", handleClick);
+  }, [nonce, onSignedIn]);
 
   return (
     <button

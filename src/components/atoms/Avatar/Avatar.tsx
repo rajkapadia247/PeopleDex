@@ -29,6 +29,7 @@ const Avatar: FunctionComponent<AvatarProps> = ({
           src={photoUrl}
           alt={displayName || "User"}
           className="avatar-image"
+          referrerPolicy="no-referrer"
         />
       ) : (
         <img
