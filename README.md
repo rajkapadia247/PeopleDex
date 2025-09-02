@@ -47,16 +47,6 @@ A clean, responsive UI for **PeopleDex**, a modern contact book. Users can sign 
 
 ---
 
-## Screenshots
-
-Add screenshots to `/docs` and update paths below.
-
-| Home / Contacts                   | Add Contact (with avatar)       | Search                                |
-| --------------------------------- | ------------------------------- | ------------------------------------- |
-| ![Home](docs/screenshot-home.png) | ![Add](docs/screenshot-add.png) | ![Search](docs/screenshot-search.png) |
-
----
-
 ## Getting started
 
 ### Prerequisites
@@ -97,20 +87,15 @@ npm run preview
 > Use the prefix that matches your tooling:
 >
 > - **Vite** → `VITE_...`
-> - **CRA** → `REACT_APP_...`
 
 Create `.env` with:
 
 ```
 # Base URL of your backend API (no trailing slash)
 VITE_API_URL=https://api.yourdomain.com
-# or
-REACT_APP_API_URL=https://api.yourdomain.com
 
 # Google OAuth (front-end client ID for the Google button/SDK)
 VITE_GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
-# or
-REACT_APP_GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
 ```
 
 **Where they’re used**
