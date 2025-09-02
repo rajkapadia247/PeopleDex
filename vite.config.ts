@@ -5,4 +5,12 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   base: "/",
+  define: {
+    "import.meta.env.VITE_GIT_SHA": JSON.stringify(
+      process.env.VITE_GIT_SHA || "dev"
+    ),
+    "import.meta.env.VITE_GIT_BRANCH": JSON.stringify(
+      process.env.VITE_GIT_BRANCH || "local"
+    ),
+  },
 });

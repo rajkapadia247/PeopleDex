@@ -25,6 +25,8 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
+          VITE_GIT_SHA: ${{ github.sha }}
+          VITE_GIT_BRANCH: ${{ github.ref_name }}
           VITE_GOOGLE_CLIENT_ID: ${{ vars.VITE_GOOGLE_CLIENT_ID }}
           VITE_API_URL: ${{ vars.VITE_API_URL }}
       - name: Create 404.html for SPA routing
