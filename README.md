@@ -56,8 +56,8 @@ A clean, responsive UI for **PeopleDex**, a modern contact book. Users can sign 
 ### 1) Clone & install
 
 ```bash
-git clone https://github.com/<you>/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/rajkapadia247/peopledex.git
+cd peopledex
 npm install
 ```
 
