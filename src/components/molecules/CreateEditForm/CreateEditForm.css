@@ -1,10 +1,12 @@
 .form-container {
   margin-top: 8px;
+  text-align: left;
 }
 
 .form-field {
   margin-bottom: 16px;
   position: relative;
+  text-align: left;
 }
 
 .form-field-input-container {
@@ -65,6 +67,7 @@
   font-size: 14px;
   margin-top: 6px;
   display: block;
+  text-align: left;
 }
 
 .form-field-label {
@@ -72,6 +75,7 @@
   font-size: 14px;
   color: var(--text-secondary);
   margin-bottom: 8px;
+  text-align: left;
 }
 
 .form-field-file-row {

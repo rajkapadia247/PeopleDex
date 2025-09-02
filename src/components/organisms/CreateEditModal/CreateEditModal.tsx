@@ -75,7 +75,12 @@ const CreateEditModal: FunctionComponent<CreateEditModalProps> = ({
     }
   };
 
-  const isFormValid = formData.name.trim() && formData.phone.trim();
+  const emailValue = (formData.email || "").trim();
+  const isEmailValidOrEmpty =
+    !emailValue || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
+  const isFormValid = Boolean(
+    formData.name.trim() && formData.phone.trim() && isEmailValidOrEmpty
+  );
 
   if (!isOpen) return null;
 

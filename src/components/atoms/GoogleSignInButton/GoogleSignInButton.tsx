@@ -3,6 +3,8 @@ import api from "../../../helpers/axios";
 
 type Props = {
   onSignedIn: (userData: { token: string; user: object }) => void;
+  setLoading?: (loading: boolean) => void;
+  disabled?: boolean;
 };
 
 declare global {
@@ -11,7 +13,11 @@ declare global {
   }
 }
 
-export default function GoogleSignInButton({ onSignedIn }: Props) {
+export default function GoogleSignInButton({
+  onSignedIn,
+  setLoading,
+  disabled,
+}: Props) {
   const btnRef = useRef<HTMLButtonElement | null>(null);
 
   const nonce = useMemo(() => {
@@ -43,6 +49,7 @@ export default function GoogleSignInButton({ onSignedIn }: Props) {
   useEffect(() => {
     if (!btnRef.current) return;
     const handleClick = () => {
+      if (disabled) return;
       if (!window.google) return;
       window.google.accounts.oauth2
         .initTokenClient({
@@ -50,11 +57,13 @@ export default function GoogleSignInButton({ onSignedIn }: Props) {
           scope: "openid email profile",
           callback: async (response: any) => {
             try {
+              setLoading && setLoading(true);
               const res = await api.post("/auth/google/verify", {
                 access_token: response.access_token,
                 nonce,
               });
               onSignedIn(res?.data?.userData);
+              setLoading && setLoading(false);
             } catch (err) {
               console.error("Google sign-in verification failed");
             }
@@ -65,7 +74,7 @@ export default function GoogleSignInButton({ onSignedIn }: Props) {
     const btn = btnRef.current;
     btn.addEventListener("click", handleClick);
     return () => btn.removeEventListener("click", handleClick);
-  }, [nonce, onSignedIn]);
+  }, [nonce, onSignedIn, disabled]);
 
   return (
     <button
@@ -73,6 +82,7 @@ export default function GoogleSignInButton({ onSignedIn }: Props) {
       type="button"
       className="google-button"
       aria-label="Continue with Google"
+      disabled={Boolean(disabled)}
     >
       <svg className="google-icon" viewBox="0 0 24 24">
         <path

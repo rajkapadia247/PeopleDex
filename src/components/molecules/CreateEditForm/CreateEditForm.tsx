@@ -96,13 +96,6 @@ const CreateEditForm: FunctionComponent<CreateEditFormProps> = ({
     ) {
       return "Please enter a valid email address";
     }
-    if (
-      field.type === "tel" &&
-      value &&
-      !/^[\+]?[(]?[0-9\s\-\(\)]{10,}$/.test(value.replace(/\s/g, ""))
-    ) {
-      return "Please enter a valid phone number";
-    }
     return "";
   };
 

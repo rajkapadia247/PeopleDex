@@ -120,6 +120,8 @@ const Login: FunctionComponent<LoginProps> = () => {
                 login(userData);
                 navigate("/");
               }}
+              setLoading={setLoading}
+              disabled={loading}
             />
 
             <div className="auth-links">
